@@ -35,6 +35,14 @@
         <a href="#categorias">Categorías</a>
         <a href="#biblioteca">Biblioteca</a>
         <a href="#autores">Autores</a>
+        <div class="nav-auth nav-auth-mobile">
+          <button class="auth-nav-btn auth-nav-login" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">
+            <i class="fa-regular fa-user"></i> Iniciar sesión
+          </button>
+          <button class="auth-nav-btn auth-nav-register" type="button" data-bs-toggle="modal" data-bs-target="#registerModal">
+            Registrarme
+          </button>
+        </div>
       </div>
 
       <div class="nav-actions">
@@ -45,7 +53,14 @@
           <span>Carrito</span>
           <b class="cart-count" aria-live="polite">0</b>
         </button>
-        <a class="login-link" href="#newsletter">Iniciar sesión</a>
+        <div class="nav-auth">
+          <button class="auth-nav-btn auth-nav-login" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">
+            <i class="fa-regular fa-user"></i> Iniciar sesión
+          </button>
+          <button class="auth-nav-btn auth-nav-register" type="button" data-bs-toggle="modal" data-bs-target="#registerModal">
+            Registrarme
+          </button>
+        </div>
       </div>
     </nav>
   </header>
@@ -307,6 +322,122 @@
       <button class="button button-primary dialog-add" type="button">Agregar al carrito</button>
     </div>
   </dialog>
+
+  <!-- Modal: Iniciar sesión -->
+  <div class="modal fade auth-modal" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <button type="button" class="auth-close" data-bs-dismiss="modal" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+
+        <div class="auth-body">
+          <span class="auth-mark" aria-hidden="true">✦</span>
+          <p class="eyebrow">BIENVENIDO DE NUEVO</p>
+          <h2 id="loginModalLabel">Inicia sesión</h2>
+          <p class="auth-subtitle">Continúa tu lectura justo donde la dejaste.</p>
+
+          <div class="auth-social">
+            <button type="button" class="auth-social-btn"><i class="fa-brands fa-google"></i> Google</button>
+            <button type="button" class="auth-social-btn"><i class="fa-brands fa-apple"></i> Apple</button>
+          </div>
+          <div class="auth-divider"><span>o con tu correo</span></div>
+
+          <form class="auth-form" id="login-form" novalidate>
+            <label class="auth-field">
+              <i class="fa-regular fa-envelope"></i>
+              <input type="email" id="login-email" name="email" placeholder="Correo electrónico" autocomplete="email" required>
+            </label>
+
+            <label class="auth-field">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="login-password" name="password" placeholder="Contraseña" autocomplete="current-password" required minlength="6">
+              <button type="button" class="auth-toggle-pass" aria-label="Mostrar contraseña" aria-pressed="false">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </label>
+
+            <div class="auth-row">
+              <label class="auth-checkbox">
+                <input type="checkbox" name="remember">
+                <span>Recuérdame</span>
+              </label>
+              <a class="auth-link-small" href="#newsletter">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <button type="submit" class="button button-primary auth-submit">Iniciar sesión <span>→</span></button>
+          </form>
+
+          <p class="auth-switch">¿Aún no tienes cuenta?
+            <button type="button" class="auth-switch-link" data-switch-from="loginModal" data-switch-to="registerModal">Regístrate</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Registro -->
+  <div class="modal fade auth-modal" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <button type="button" class="auth-close" data-bs-dismiss="modal" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+
+        <div class="auth-body">
+          <span class="auth-mark" aria-hidden="true">✦</span>
+          <p class="eyebrow">ÚNETE A LUMEN</p>
+          <h2 id="registerModalLabel">Crea tu cuenta</h2>
+          <p class="auth-subtitle">Guarda libros, arma colecciones y sigue leyendo donde quieras.</p>
+
+          <div class="auth-social">
+            <button type="button" class="auth-social-btn"><i class="fa-brands fa-google"></i> Google</button>
+            <button type="button" class="auth-social-btn"><i class="fa-brands fa-apple"></i> Apple</button>
+          </div>
+          <div class="auth-divider"><span>o con tu correo</span></div>
+
+          <form class="auth-form" id="register-form" novalidate>
+            <label class="auth-field">
+              <i class="fa-regular fa-user"></i>
+              <input type="text" id="register-name" name="name" placeholder="Nombre completo" autocomplete="name" required>
+            </label>
+
+            <label class="auth-field">
+              <i class="fa-regular fa-envelope"></i>
+              <input type="email" id="register-email" name="email" placeholder="Correo electrónico" autocomplete="email" required>
+            </label>
+
+            <label class="auth-field">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="register-password" name="password" placeholder="Contraseña" autocomplete="new-password" required minlength="6">
+              <button type="button" class="auth-toggle-pass" aria-label="Mostrar contraseña" aria-pressed="false">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </label>
+
+            <div class="auth-strength" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+
+            <label class="auth-field">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="register-confirm" name="confirm" placeholder="Confirmar contraseña" autocomplete="new-password" required minlength="6">
+              <button type="button" class="auth-toggle-pass" aria-label="Mostrar contraseña" aria-pressed="false">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </label>
+
+            <label class="auth-checkbox auth-terms">
+              <input type="checkbox" name="terms" required>
+              <span>Acepto los <a href="#" class="auth-link-small">Términos</a> y la <a href="#" class="auth-link-small">Privacidad</a></span>
+            </label>
+
+            <button type="submit" class="button button-primary auth-submit">Crear cuenta <span>→</span></button>
+          </form>
+
+          <p class="auth-switch">¿Ya tienes cuenta?
+            <button type="button" class="auth-switch-link" data-switch-from="registerModal" data-switch-to="loginModal">Inicia sesión</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="/static/js/bootstrap.bundle.min.js"></script>
   <script src="/static/js/all.min.js"></script>
