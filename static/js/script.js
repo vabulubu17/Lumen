@@ -176,3 +176,78 @@ document.querySelector('[data-action="favorites"]')?.addEventListener("click", (
 document.querySelector('[data-action="cart"]')?.addEventListener("click", () => {
   showToast(cartItems ? `Tienes ${cartItems} ${cartItems === 1 ? "libro" : "libros"} en tu carrito.` : "Tu carrito está vacío.");
 });
+
+/* Auth modals — solo diseño y animación de apoyo, sin lógica de autenticación real */
+document.querySelectorAll(".auth-toggle-pass").forEach(toggle => {
+  toggle.addEventListener("click", () => {
+    const input = toggle.previousElementSibling;
+    if (!input) return;
+    const isVisible = input.type === "text";
+    input.type = isVisible ? "password" : "text";
+    toggle.setAttribute("aria-pressed", String(!isVisible));
+    toggle.innerHTML = isVisible
+      ? '<i class="fa-regular fa-eye"></i>'
+      : '<i class="fa-regular fa-eye-slash"></i>';
+  });
+});
+
+/* Cambio entre modal de login y registro */
+document.querySelectorAll(".auth-switch-link").forEach(link => {
+  link.addEventListener("click", () => {
+    const fromId = link.dataset.switchFrom;
+    const toId = link.dataset.switchTo;
+    const fromModalEl = document.getElementById(fromId);
+    const toModalEl = document.getElementById(toId);
+    if (!fromModalEl || !toModalEl || typeof bootstrap === "undefined") return;
+
+    const fromModal = bootstrap.Modal.getOrCreateInstance(fromModalEl);
+    fromModal.hide();
+
+    fromModalEl.addEventListener("hidden.bs.modal", () => {
+      bootstrap.Modal.getOrCreateInstance(toModalEl).show();
+    }, { once: true });
+  });
+});
+
+/* Indicador visual de fuerza de contraseña (solo estético, sin validar seguridad real) */
+const registerPassword = document.querySelector("#register-password");
+const strengthBars = document.querySelectorAll(".auth-strength span");
+
+function paintStrength(value) {
+  if (!strengthBars.length) return;
+  const length = value.length;
+  let level = 0;
+  if (length >= 1) level = 1;
+  if (length >= 5) level = 2;
+  if (length >= 8) level = 3;
+  if (length >= 8 && /[A-Z]/.test(value) && /[0-9]/.test(value)) level = 4;
+
+  const colors = ["var(--acento)", "var(--acento)", "#c98a1f", "var(--secundario)"];
+  strengthBars.forEach((bar, index) => {
+    bar.style.background = index < level ? colors[level - 1] : "";
+  });
+}
+
+registerPassword?.addEventListener("input", event => paintStrength(event.target.value));
+
+/* Envío de formularios: feedback visual únicamente, no hay backend conectado */
+document.querySelector("#login-form")?.addEventListener("submit", event => {
+  event.preventDefault();
+  const modalEl = document.querySelector("#loginModal");
+  showToast("¡Qué bueno verte de nuevo! Iniciando sesión…");
+  if (typeof bootstrap !== "undefined" && modalEl) {
+    bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+  }
+  event.target.reset();
+});
+
+document.querySelector("#register-form")?.addEventListener("submit", event => {
+  event.preventDefault();
+  const modalEl = document.querySelector("#registerModal");
+  showToast("¡Bienvenido a Lumen! Tu cuenta está casi lista.");
+  if (typeof bootstrap !== "undefined" && modalEl) {
+    bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+  }
+  event.target.reset();
+  strengthBars.forEach(bar => (bar.style.background = ""));
+});

@@ -9,82 +9,27 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static',filename='css/all.min.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
-
+  
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css')}}"></link>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/all.min.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
 </head>
 
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header class="site-header" id="site-header">
-    <nav class="nav container" aria-label="Navegación principal">
-      <a class="brand" href="#inicio" aria-label="Lumen, inicio">
-        <span class="brand-mark" aria-hidden="true">✦</span>
-        <span>Lumen</span>
-      </a>
-
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Abrir menú">
-        <span></span><span></span><span></span>
-      </button>
-
-      <div class="nav-menu" id="primary-menu">
-        <a href="#inicio">Inicio</a>
-        <a href="#libros">Libros</a>
-        <a href="#categorias">Categorías</a>
-        <a href="#biblioteca">Biblioteca</a>
-        <a href="#autores">Autores</a>
-      </div>
-
-      <div class="nav-actions">
-        <button class="icon-button" type="button" data-action="search" aria-label="Buscar libros">⌕</button>
-        <button class="icon-button" type="button" data-action="favorites" aria-label="Favoritos">♡</button>
-        <button class="cart-button" type="button" data-action="cart" aria-label="Carrito">
-          <span aria-hidden="true">🛒</span>
-          <span>Carrito</span>
-          <b class="cart-count" aria-live="polite">0</b>
-        </button>
-        <a class="login-link" href="#newsletter">Iniciar sesión</a>
-      </div>
-    </nav>
+   {% include 'components/navbar.html' %}
   </header>
 
-<main id="main-content">
-    {% block contenido %}{% endblock %}
-</main>
+ <main id="contenido">
+  {% block contenido %} {% endblock %}
+</main> 
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <a class="brand brand-light" href="#inicio"><span class="brand-mark">✦</span><span>Lumen</span></a>
-        <p>Una biblioteca para mentes curiosas.</p>
-        <div class="socials"><a href="#" aria-label="Instagram">ig</a><a href="#" aria-label="X">𝕏</a><a href="#" aria-label="YouTube">yt</a></div>
-      </div>
+   {% include 'components/footer.html' %}
 
-      <nav aria-label="Explorar">
-        <h2>Explorar</h2>
-        <a href="#libros">Libros</a><a href="#categorias">Categorías</a><a href="#autores">Autores</a><a href="#libros">Nuevos lanzamientos</a>
-      </nav>
-      <nav aria-label="Comunidad">
-        <h2>Comunidad</h2>
-        <a href="#">Club de lectura</a><a href="#">Recomendaciones</a><a href="#">Eventos</a><a href="#newsletter">Newsletter</a>
-      </nav>
-      <nav aria-label="Ayuda">
-        <h2>Ayuda</h2>
-        <a href="#">Preguntas frecuentes</a><a href="#">Envíos</a><a href="#">Devoluciones</a><a href="#">Contacto</a>
-      </nav>
-    </div>
-    <div class="container footer-bottom">
-      <span>© 2026 Lumen. Todos los derechos reservados.</span>
-      <span>Hecho para quienes siguen preguntando.</span>
-    </div>
-  </footer>
 
   <div class="toast" role="status" aria-live="polite"></div>
-  <script src="{{ url_for('static',filename='js/all.min.js') }}"></script>
-  <script src="{{ url_for('static',filename='js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ url_for('static',filename='js/script.js') }}"></script>
 
   <dialog class="book-dialog" id="book-dialog">
     <button class="dialog-close" type="button" aria-label="Cerrar">×</button>
@@ -95,5 +40,127 @@
       <button class="button button-primary dialog-add" type="button">Agregar al carrito</button>
     </div>
   </dialog>
+
+  <!-- Modal: Iniciar sesión -->
+  <div class="modal fade auth-modal" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <button type="button" class="auth-close" data-bs-dismiss="modal" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+
+        <div class="auth-body">
+          <span class="auth-mark" aria-hidden="true">✦</span>
+          <p class="eyebrow">BIENVENIDO DE NUEVO</p>
+          <h2 id="loginModalLabel">Inicia sesión</h2>
+          <p class="auth-subtitle">Continúa tu lectura justo donde la dejaste.</p>
+
+          <div class="auth-social">
+            <button type="button" class="auth-social-btn"><i class="fa-brands fa-google"></i> Google</button>
+            <button type="button" class="auth-social-btn"><i class="fa-brands fa-apple"></i> Apple</button>
+          </div>
+          <div class="auth-divider"><span>o con tu correo</span></div>
+
+          <form class="auth-form" id="login-form" novalidate>
+            <label class="auth-field">
+              <i class="fa-regular fa-envelope"></i>
+              <input type="email" id="login-email" name="email" placeholder="Correo electrónico" autocomplete="email" required>
+            </label>
+
+            <label class="auth-field">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="login-password" name="password" placeholder="Contraseña" autocomplete="current-password" required minlength="6">
+              <button type="button" class="auth-toggle-pass" aria-label="Mostrar contraseña" aria-pressed="false">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </label>
+
+            <div class="auth-row">
+              <label class="auth-checkbox">
+                <input type="checkbox" name="remember">
+                <span>Recuérdame</span>
+              </label>
+              <a class="auth-link-small" href="#newsletter">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <button type="submit" class="button button-primary auth-submit">Iniciar sesión <span>→</span></button>
+          </form>
+
+          <p class="auth-switch">¿Aún no tienes cuenta?
+            <button type="button" class="auth-switch-link" data-switch-from="loginModal" data-switch-to="registerModal">Regístrate</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Registro -->
+  <div class="modal fade auth-modal" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <button type="button" class="auth-close" data-bs-dismiss="modal" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+
+        <div class="auth-body">
+          <span class="auth-mark" aria-hidden="true">✦</span>
+          <p class="eyebrow">ÚNETE A LUMEN</p>
+          <h2 id="registerModalLabel">Crea tu cuenta</h2>
+          <p class="auth-subtitle">Guarda libros, arma colecciones y sigue leyendo donde quieras.</p>
+
+          <div class="auth-social">
+            <button type="button" class="auth-social-btn"><i class="fa-brands fa-google"></i> Google</button>
+            <button type="button" class="auth-social-btn"><i class="fa-brands fa-apple"></i> Apple</button>
+          </div>
+          <div class="auth-divider"><span>o con tu correo</span></div>
+
+          <form class="auth-form" id="register-form" novalidate>
+            <label class="auth-field">
+              <i class="fa-regular fa-user"></i>
+              <input type="text" id="register-name" name="name" placeholder="Nombre completo" autocomplete="name" required>
+            </label>
+
+            <label class="auth-field">
+              <i class="fa-regular fa-envelope"></i>
+              <input type="email" id="register-email" name="email" placeholder="Correo electrónico" autocomplete="email" required>
+            </label>
+
+            <label class="auth-field">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="register-password" name="password" placeholder="Contraseña" autocomplete="new-password" required minlength="6">
+              <button type="button" class="auth-toggle-pass" aria-label="Mostrar contraseña" aria-pressed="false">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </label>
+
+            <div class="auth-strength" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+
+            <label class="auth-field">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="register-confirm" name="confirm" placeholder="Confirmar contraseña" autocomplete="new-password" required minlength="6">
+              <button type="button" class="auth-toggle-pass" aria-label="Mostrar contraseña" aria-pressed="false">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </label>
+
+            <label class="auth-checkbox auth-terms">
+              <input type="checkbox" name="terms" required>
+              <span>Acepto los <a href="#" class="auth-link-small">Términos</a> y la <a href="#" class="auth-link-small">Privacidad</a></span>
+            </label>
+
+            <button type="submit" class="button button-primary auth-submit">Crear cuenta <span>→</span></button>
+          </form>
+
+          <p class="auth-switch">¿Ya tienes cuenta?
+            <button type="button" class="auth-switch-link" data-switch-from="registerModal" data-switch-to="loginModal">Inicia sesión</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static',filename='js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ url_for('static',filename='js/all.min.js')}}"></script>
+  <script src="{{ url_for('static',filename='js/script.js')}}" defer></script>
+
+
 </body>
 </html>
