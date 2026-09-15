@@ -59,7 +59,7 @@
           </div>
           <div class="auth-divider"><span>o con tu correo</span></div>
 
-          <form class="auth-form" id="login-form" novalidate>
+          <form class="autho-form" id="login-form" novalidate>
             <label class="auth-field">
               <i class="fa-regular fa-envelope"></i>
               <input type="email" id="login-email" name="email" placeholder="Correo electrónico" autocomplete="email" required>
@@ -110,20 +110,20 @@
           </div>
           <div class="auth-divider"><span>o con tu correo</span></div>
 
-          <form class="auth-form" id="register-form" novalidate>
+          <form action="{{url_for('signup')}}" method="post" class="auth-form" id="register-form" novalidate>
             <label class="auth-field">
               <i class="fa-regular fa-user"></i>
-              <input type="text" id="register-name" name="name" placeholder="Nombre completo" autocomplete="name" required>
+              <input type="text" id="register-name" name="nombre" placeholder="Nombre completo" autocomplete="name" required>
             </label>
 
             <label class="auth-field">
               <i class="fa-regular fa-envelope"></i>
-              <input type="email" id="register-email" name="email" placeholder="Correo electrónico" autocomplete="email" required>
+              <input type="email" id="register-email" name="correo" placeholder="Correo electrónico" autocomplete="email" required>
             </label>
 
             <label class="auth-field">
               <i class="fa-solid fa-lock"></i>
-              <input type="password" id="register-password" name="password" placeholder="Contraseña" autocomplete="new-password" required minlength="6">
+              <input type="password" id="register-password" name="clave" placeholder="Contraseña" autocomplete="new-password" required minlength="6">
               <button type="button" class="auth-toggle-pass" aria-label="Mostrar contraseña" aria-pressed="false">
                 <i class="fa-regular fa-eye"></i>
               </button>

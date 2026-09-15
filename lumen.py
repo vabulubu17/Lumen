@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
+from flask_mysqldb import MySQL
+from config import config
 
 lumenApp    =Flask(__name__)
+db          = MySQL(lumenApp)
 
 @lumenApp.route('/')
 
