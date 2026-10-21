@@ -43,9 +43,9 @@ def signin():
             if usuarioAutenticado.clave:
                 login_user(usuarioAutenticado)
                 if usuarioAutenticado.perfil == 'A':
-                    return render_template('admin.html')
+                    return redirect(url_for('home_admin'))
                 else:
-                    return render_template('user.html')
+                    return render_template(url_for('home_user'))
             else:
                 flash('contraseña incorrecta')
                 redirect(url_for('home'))
@@ -55,5 +55,19 @@ def signin():
     else:
         render_template('home.html')
 
+@lumenApp.route('/signout', methods = ['GET', 'POST'])
+def signout():
+    logout_user()
+    return redirect(url_for('home'))
+
+@lumenApp.route ('/home_admin', methods = ['GET', 'POST'])
+@login_required
+def home_admin ():
+    return render_template ('admin.html')
+
+@lumenApp.route ('/home_user', methods = ['GET', 'POST'])
+@login_required
+def home_user ():
+    return render_template ('user.html')
 if __name__ == '__main__':
     lumenApp.run(port=1703)

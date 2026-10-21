@@ -21,16 +21,16 @@
   <header class="site-header" id="site-header">
   {% if current_user.is_authenticated and current_user.perfil == 'A' %}
   {% include 'components/navbar_admin.html' %}
-  {& else &}
-   {% include 'components/navbar.html' %}
-   {& endif &}
+  {% else %}
+  {% include 'components/navbar.html' %}
+  {% endif %}
   </header>
 
- <main id="contenido">
+<main id="contenido">
   {% block contenido %} {% endblock %}
 </main> 
 
-   {% include 'components/footer.html' %}
+  {% include 'components/footer.html' %}
 
 
   <div class="toast" role="status" aria-live="polite"></div>
