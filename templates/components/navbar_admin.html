@@ -22,7 +22,19 @@
             Registrarme
           </button>
         </div>
-      </div>
+      </div>  
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{url_for('sUsuario')}}">Usuarios</a></li>
+            <li><a class="dropdown-item" href="#">Servicios</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
 
       <div class="nav-actions">
         <button class="icon-button" type="button" data-action="search" aria-label="Buscar libros">⌕</button>

@@ -15,7 +15,7 @@ class ModelUser:
             raise Exception(ex)
 
     @classmethod
-    def signin(self, db, usuario):
+    def get_by_id(self, db, usuario):
         try:
             selUsuario = db.connection.cursor()
             selUsuario.execute("SELECT * FROM usuario WHERE correo = %s", (usuario.id,))

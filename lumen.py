@@ -27,7 +27,7 @@ def signup():
         clave = request.form['clave']
         claveCifrada = generate_password_hash(clave)
         regUsuario = db.connection.cursor()
-        regUsuario.execute("INSERT INTO usuario (nombre, correo, clave) VALUES (%s, %s, %s)", (nombre, correo, claveCifrada))
+        regUsuario.execute("INSERT INTO usuario (nombre, correo, clave, perfil) VALUES (%s, %s, %s, %s)", (nombre, correo, claveCifrada, 'U'))
         db.connection.commit()
         regUsuario.close()
         return redirect(url_for('home'))
@@ -37,15 +37,15 @@ def signup():
 @lumenApp.route('/signin', methods = ['GET', 'POST'])
 def signin():
     if request.method == 'POST':
-        usuario = User(0,None,request.form['correo'],request.form['clave'], None)
-        usuarioAutenticado = ModelUser.signin(db,usuario)
+        usuario = User(0,None,request.form['correo'], request.form['clave'], None)
+        usuarioAutenticado = ModelUser.signin(db, usuario)
         if usuarioAutenticado is not None:
             if usuarioAutenticado.clave:
                 login_user(usuarioAutenticado)
                 if usuarioAutenticado.perfil == 'A':
                     return redirect(url_for('home_admin'))
                 else:
-                    return render_template(url_for('home_user'))
+                    return redirect(url_for('home_user'))
             else:
                 flash('contraseña incorrecta')
                 redirect(url_for('home'))
@@ -69,5 +69,11 @@ def home_admin ():
 @login_required
 def home_user ():
     return render_template ('user.html')
+
+@lumenApp.route ('/sUsuario', methods = ['GET', 'POST'])
+@login_required
+def sUsuario ():
+    return render_template ('users.html')
+
 if __name__ == '__main__':
     lumenApp.run(port=1703)
