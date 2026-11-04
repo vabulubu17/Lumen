@@ -37,7 +37,7 @@ def signup():
 @lumenApp.route('/signin', methods = ['GET', 'POST'])
 def signin():
     if request.method == 'POST':
-        usuario = User(0,None,request.form['correo'], request.form['clave'], None)
+        usuario = User(0, None, request.form['correo'], request.form['clave'], None)
         usuarioAutenticado = ModelUser.signin(db, usuario)
         if usuarioAutenticado is not None:
             if usuarioAutenticado.clave:
@@ -76,4 +76,4 @@ def sUsuario ():
     return render_template ('users.html')
 
 if __name__ == '__main__':
-    lumenApp.run(port=1703)
+    lumenApp.run(debug=True, port=1703)
