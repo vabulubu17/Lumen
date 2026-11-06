@@ -47,6 +47,11 @@ button { border: 0; cursor: pointer; }
 .nav-menu a:hover::after { right: 0; }
 .nav-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
 .icon-button, .cart-button { background: transparent; color: var(--primario); }
+.nav-menu .dropdown-toggle::after {
+  content: ""; position: static; display: inline-block; height: 0; background: none;
+  margin-left: .4em; vertical-align: .2em;
+  border-top: .3em solid; border-right: .3em solid transparent; border-left: .3em solid transparent;
+}
 .icon-button { width: 38px; height: 38px; font-size: 25px; }
 .cart-button { display: flex; gap: 8px; align-items: center; font-size: 13px; font-weight: 600; padding: 8px 12px; border: 1px solid var(--borde); border-radius: 999px; }
 .cart-count { display: grid; place-items: center; min-width: 21px; height: 21px; padding-inline: 4px; background: var(--acento); color: white; border-radius: 50%; font-size: 11px; }

@@ -25,7 +25,7 @@ menuToggle?.addEventListener("click", () => {
   menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
 });
 
-navMenu?.querySelectorAll("a").forEach(link => {
+navMenu?.querySelectorAll("a:not([data-bs-toggle])").forEach(link => {
   link.addEventListener("click", () => {
     navMenu.classList.remove("open");
     menuToggle?.setAttribute("aria-expanded", "false");

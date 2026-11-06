@@ -20,9 +20,11 @@
 
   <header class="site-header" id="site-header">
   {% if current_user.is_authenticated and current_user.perfil == 'A' %}
-  {% include 'components/navbar_admin.html' %}
+    {% include 'components/navbar_admin.html' %}
+  {% elif current_user.is_authenticated %}
+    {% include 'components/navbar_user.html' %}
   {% else %}
-  {% include 'components/navbar.html' %}
+    {% include 'components/navbar.html' %}
   {% endif %}
   </header>
 
@@ -63,7 +65,7 @@
           </div>
           <div class="auth-divider"><span>o con tu correo</span></div>
 
-          <form action="{{url_for('signin')}}" method="post" class="autho-form" id="login-form" novalidate>
+          <form action="{{url_for('signin')}}" method="post" class="auth-form" id="login-form" novalidate>
             {% with mensajes = get_flashed_messages() %}
             {% if mensajes %}
               {% for m in mensajes %}
@@ -170,9 +172,9 @@
     </div>
   </div>
 
-  <script src="{{ url_for('static',filename='js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{ url_for('static',filename='js/all.min.js')}}"></script>
-  <script src="{{ url_for('static',filename='js/script.js')}}"></script>
+<script src="{{ url_for('static',filename='js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ url_for('static',filename='js/script.js')}}"></script>
+<script src="{{ url_for('static',filename='js/all.min.js')}}"></script>
 
 
 </body>

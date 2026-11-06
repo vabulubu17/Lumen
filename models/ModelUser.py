@@ -15,14 +15,11 @@ class ModelUser:
             raise Exception(ex)
 
     @classmethod
-    def get_by_id(self, db, usuario):
-        try:
-            selUsuario = db.connection.cursor()
-            selUsuario.execute("SELECT * FROM usuario WHERE correo = %s", (usuario.id,))
-            u = selUsuario.fetchone()
-            if u is not None:
-                return User(u[0], u[1], u[2], u[3], u[4])
-            else:
-                return None
-        except Exception as ex:
-            raise Exception(ex)
+    def get_by_id(cls, db, id):
+        cur = db.connection.cursor()
+        cur.execute("SELECT id, nombre, correo, clave, perfil FROM usuario WHERE id = %s", (id,))
+        u = cur.fetchone()
+        cur.close()
+        if u is None:
+            return None
+        return User(u[0], u[1], u[2], u[3], u[4])
