@@ -230,24 +230,15 @@ function paintStrength(value) {
 
 registerPassword?.addEventListener("input", event => paintStrength(event.target.value));
 
-/* Envío de formularios: feedback visual únicamente, no hay backend conectado */
-document.querySelector("#login-form")?.addEventListener("submit", event => {
-  event.preventDefault();
-  const modalEl = document.querySelector("#loginModal");
-  showToast("¡Qué bueno verte de nuevo! Iniciando sesión…");
-  if (typeof bootstrap !== "undefined" && modalEl) {
-    bootstrap.Modal.getOrCreateInstance(modalEl).hide();
-  }
-  event.target.reset();
-});
-
+/* Los formularios se envían a Flask (/signin y /signup) */
 document.querySelector("#register-form")?.addEventListener("submit", event => {
-  event.preventDefault();
-  const modalEl = document.querySelector("#registerModal");
-  showToast("¡Bienvenido a Lumen! Tu cuenta está casi lista.");
-  if (typeof bootstrap !== "undefined" && modalEl) {
-    bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+  const pass = document.querySelector("#register-password").value;
+  const confirm = document.querySelector("#register-confirm").value;
+  if (pass.length < 6) {
+    event.preventDefault();
+    showToast("La contraseña debe tener al menos 6 caracteres.");
+  } else if (pass !== confirm) {
+    event.preventDefault();
+    showToast("Las contraseñas no coinciden.");
   }
-  event.target.reset();
-  strengthBars.forEach(bar => (bar.style.background = ""));
 });
