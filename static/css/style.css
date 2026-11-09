@@ -38,7 +38,7 @@ button { border: 0; cursor: pointer; }
   backdrop-filter: blur(14px); border-bottom: 1px solid transparent; transition: .3s ease;
 }
 .site-header.scrolled { background: rgba(253,248,237,.96); box-shadow: 0 8px 30px rgba(0,20,39,.08); border-color: var(--borde); }
-.nav { min-height: 82px; display: flex; align-items: center; gap: 28px; }
+.nav { min-height: 82px; display: flex; flex-wrap: nowrap; align-items: center; gap: 28px; }
 .brand { display: inline-flex; align-items: center; gap: 8px; font: 700 28px/1 "Playfair Display", serif; letter-spacing: -.04em; }
 .brand-mark { color: var(--acento); font-family: serif; font-size: 22px; }
 .nav-menu { display: flex; align-items: center; gap: 25px; margin-left: 32px; font-size: 13px; font-weight: 600; }
@@ -274,7 +274,13 @@ em { color: var(--acento); font-style: normal; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
 @media (max-width: 1024px) {
-  .nav-menu { margin-left: 5px; gap: 14px; }
+  .menu-toggle { display: block; margin-left: auto; order: 3; }
+  .nav-menu { position: absolute; top: 70px; left: 0; right: 0; margin: 0; padding: 20px 24px; background: var(--superficie); border-bottom: 1px solid var(--borde); display: none; flex-direction: column; align-items: flex-start; gap: 18px; box-shadow: 0 15px 25px rgba(0,20,39,.08); }
+  .nav-menu.open { display: flex; }
+  .nav-auth-mobile { display: flex; flex-direction: column; align-items: stretch; gap: 10px; width: 100%; margin-top: 6px; padding-top: 16px; border-top: 1px solid var(--borde); }
+  .nav-auth-mobile .auth-nav-btn { justify-content: center; }
+  .nav-auth-mobile .auth-nav-login { border: 1px solid var(--borde); }
+  .nav-actions { margin-left: auto; }
   .nav-actions > .nav-auth:not(.nav-auth-mobile) { display: none; }
   .hero { grid-template-columns: 1fr; padding-top: 55px; }
   .hero-copy { text-align: center; }
