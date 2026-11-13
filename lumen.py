@@ -63,7 +63,7 @@ def signout():
 @lumenApp.route ('/home_admin', methods = ['GET', 'POST'])
 @login_required
 def home_admin ():
-    return render_template ('admin.html')
+    return render_template ('home_admin.html')
 
 @lumenApp.route ('/home_user', methods = ['GET', 'POST'])
 @login_required
@@ -78,7 +78,7 @@ def sUsuario ():
         selUsuario.execute("SELECT * FROM usuario")
         u = selUsuario.fetchall()
         selUsuario.close()
-        return render_template ('users.html', usuarios = u)
+        return render_template ('users.html', usuario = u)
     else:
         return render_template('home.html')
 
@@ -89,7 +89,7 @@ def uUsuario (id):
         nombre = request.form ['nombre']
         correo = request.form ['correo']
         perfil = request.form ['perfil']
-        actUsuario = db.comnection.cursor()
+        actUsuario = db.connection.cursor()
         actUsuario.execute("UPDATE usuario SET nombre = %s, correo = %s, perfil = %s WHERE id = %s", (nombre, correo, perfil, id))
         db.connection.commit ()
         actUsuario.close ()
