@@ -78,9 +78,10 @@ def sUsuario ():
         selUsuario.execute("SELECT * FROM usuario")
         u = selUsuario.fetchall()
         selUsuario.close()
-        return render_template ('users.html', usuario = u)
-    else:
-        return render_template('home.html')
+        return render_template('users.html', usuarios=u)
+    else: 
+        flash('No tiene permisos para acceder a esta página')
+        return redirect(url_for('home'))
 
 @lumenApp.route ('/uUsuario/<int:id>', methods = ['GET', 'POST'])
 @login_required
@@ -100,7 +101,7 @@ def uUsuario (id):
 
 @lumenApp.route ('/iUsuario', methods = ['GET', 'POST'])
 @login_required
-def iUsuario (id):
+def iUsuario ():
     if current_user.perfil == 'A':
         nombre = request.form ['nombre']
         correo = request.form ['correo']
@@ -121,7 +122,7 @@ def iUsuario (id):
 def dUsuario (id):
     if current_user.perfil == 'A':
         delUsuario = db.connection.cursor()
-        delUsuario.execute ("DELE FROM usuario WHERE id = %s", (id))
+        delUsuario.execute ("DELETE FROM usuario WHERE id = %s", (id))
         db.connection.commit()
         delUsuario.close()
         flash ('Usuario eliminado')
