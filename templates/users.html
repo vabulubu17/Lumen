@@ -133,6 +133,27 @@
             </div>
           </div>
 
+<!-- Modal delete -->
+<div class="modal fade" id="deleteModal{{u[0]}}" tabindex="-1" aria-labelledby="deleteModalLabel{{u[0]}}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteModalLabel{{u[0]}}">Eliminar usuario</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <form action="{{url_for('dUsuario', id=u[0])}}" method="post">
+        <div class="modal-body">
+          <p>¿Seguro que deseas eliminar el usuario?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-danger">Eliminar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
           {% endfor %}
         </tbody>
       </table>
