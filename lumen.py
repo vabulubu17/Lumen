@@ -97,7 +97,7 @@ def uUsuario (id):
         flash ('Registro Actualizado')
         redirect(url_for('sUsuario'))
     else:
-        render_template(url_for'home.html')
+        render_template(url_for('home.html'))
 
 @lumenApp.route ('/iUsuario', methods = ['GET', 'POST'])
 @login_required

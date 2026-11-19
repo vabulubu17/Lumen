@@ -46,7 +46,7 @@
 
             <label class="auth-field">
               <i class="fa-regular fa-envelope"></i>
-              <input type="email" id="register-email" name="correo" placeholder="Correo electrónico" autocomplete="email" required>
+              <input type="email" id="register-email" name="correo" value= "{{u[2]}}" placeholder="Correo electrónico" autocomplete="email" required>
             </label>
 
             <label class="auth-field">
@@ -97,7 +97,7 @@
                   <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{url_for('uUsuario', u[0])}}" method="post">
+                <form action="{{url_for('uUsuario', id=u[0])}}" method="post">
                 <div class="modal-body">
                   <form action="{{url_for('signup')}}" method="post" class="auth-form" id="register-form" novalidate>
             <label class="auth-field">
