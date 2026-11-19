@@ -97,7 +97,7 @@ def uUsuario (id):
         flash ('Registro Actualizado')
         redirect(url_for('sUsuario'))
     else:
-        render_template('home.html')
+        render_template(url_for'home.html')
 
 @lumenApp.route ('/iUsuario', methods = ['GET', 'POST'])
 @login_required
@@ -126,8 +126,9 @@ def dUsuario (id):
         db.connection.commit()
         delUsuario.close()
         flash ('Usuario eliminado')
+        return redirect(url_for('sUsuario'))
     else:
-        return render_template('home.html')
+        return redirect(url_for('home'))
 
 if __name__ == '__main__':
     lumenApp.run(debug=True, port=1703)
