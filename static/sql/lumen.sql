@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 19-11-2026 a las 18:50:33
--- Versión del servidor: 8.0.46
+-- Tiempo de generación: 23-11-2026 a las 16:25:40
+-- Versión del servidor: 8.0.43
 -- Versión de PHP: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -185,6 +185,14 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nombre`, `correo`, `clave`, `perfil`) VALUES
+(1, 'val', 'vale@gmail.com', 'scrypt:32768:8:1$c9KCP6mNFEcja76Y$adab4a789aadf62f28296e15379af40e260d5e2477e3b3b69970fc3fef36a4e09242bb5b876819600fa173b0d0817c5edcfa2736f4d8c7a81fc0d301cdff1a51', 'A'),
+(2, 'leo', 'leo@gmail.com', 'scrypt:32768:8:1$5fovWZ4VWndGhjUq$9bba4ac3a67e35ebc7da38bbe94d11ddc4f003f17fb7fc3f45a0a54097ff83a0524b58ba9c6c09977ca1dcf3ce28a55053f0a1f945bf2bbac3c678160d2d3dfd', 'U');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -271,7 +279,7 @@ ALTER TABLE `pertenece`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

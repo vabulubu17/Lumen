@@ -48,12 +48,12 @@ def signin():
                     return redirect(url_for('home_user'))
             else:
                 flash('contraseña incorrecta')
-                redirect(url_for('home'))
+                return redirect(url_for('home'))
         else:
             flash('Usuario inexistente')
-            redirect(url_for('home'))
+            return redirect(url_for('home'))
     else:
-        render_template('home.html')
+        return render_template('home.html')
 
 @lumenApp.route('/signout', methods = ['GET', 'POST'])
 def signout():
@@ -68,7 +68,11 @@ def home_admin ():
 @lumenApp.route ('/home_user', methods = ['GET', 'POST'])
 @login_required
 def home_user ():
-    return render_template ('home_user.html')
+    selLibro = db.connection.cursor()
+    selLibro.execute("SELECT * FROM libro")
+    l = selLibro.fetchall()
+    selLibro.close()
+    return render_template ('home_user.html', libros = l)
 
 @lumenApp.route ('/sUsuario', methods = ['GET', 'POST'])
 @login_required
