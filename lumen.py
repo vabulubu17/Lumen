@@ -134,5 +134,27 @@ def dUsuario (id):
     else:
         return redirect(url_for('home'))
 
+@lumenApp.route ('/sLibro', methods = ['GET', 'POST'])
+@login_required
+def sLibro():
+    if current_user.perfil == 'A':
+        selLibro = db.connection.cursor()
+        selLibro.execute ("SELECT * FROM libro")
+        l = selLibro.fetchall()
+        selLibro.close()
+        return render_template ('libro.html', libros = l)
+    else:
+        return render_template ('home.html')
+
+@lumenApp.route ('/iLibro', methods = ['GET', 'POST'])
+@login_required
+def iLibro():
+    return render_template ('home_admin.html')
+
+@lumenApp.route ('/uLibro', methods = ['GET', 'POST'])
+@login_required
+def uLibro():
+    return render_template ('home_admin.html')
+
 if __name__ == '__main__':
     lumenApp.run(debug=True, port=1703)

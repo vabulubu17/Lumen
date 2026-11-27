@@ -6,12 +6,13 @@
       {% with mensajes = get_flashed_messages() %}
         {% if mensajes %}
           {% for m in mensajes %}
-      <div class="alert alert-success" role="alert">
-        {{m}}
-      </div>
-      {% endfor %}
-      {% endif %}
+            <div class="alert alert-success" role="alert">
+              {{m}}
+            </div>
+          {% endfor %}
+        {% endif %}
       {% endwith %}
+      
       <table class="table">
         <thead>
           <tr>
